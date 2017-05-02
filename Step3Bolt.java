@@ -41,7 +41,7 @@ public class Step3Bolt extends BaseRichBolt {
             emit_data = new ObjectArray();
 
 
-            System.out.println("*** result bolt - Create Class1 noiseMap ***");
+            System.out.println("*** result bolt - Create Class1 AirMap ***");
             this.airMap = new AirMap();
 
             int o=0;

@@ -104,6 +104,7 @@ public class AirBolt extends BaseRichBolt {
 //                    result_step2 = airMap.step2(1,region_n);
 
 
+
                 }
                 catch (Exception e)
                 {
@@ -152,6 +153,7 @@ public class AirBolt extends BaseRichBolt {
         {
             System.out.println("Bolt1 Exception: " + e.toString());
         }
+        collector.ack(tuple);
 
     }
 

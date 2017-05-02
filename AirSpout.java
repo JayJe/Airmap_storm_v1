@@ -21,6 +21,7 @@ public class AirSpout extends BaseRichSpout {
         private SpoutOutputCollector collector;
 
         static private ObjectArray emit_data = null;
+        static private ObjectArray emit_data1 = null;
         static private MWNumericArray n = null;
         static private MWNumericArray region_n = null;
         Object[] result_step1_1 = null;
@@ -38,6 +39,7 @@ public class AirSpout extends BaseRichSpout {
 
         try {
             emit_data = new ObjectArray();
+            emit_data1 = new ObjectArray();
 //            double beginTime = System.currentTimeMillis();
             airMap = new AirMap();
             for (int o = 0; o <= 1; o++) {
@@ -80,6 +82,7 @@ public class AirSpout extends BaseRichSpout {
 
     public void declareOutputFields(OutputFieldsDeclarer outputFieldsDeclarer) {
         outputFieldsDeclarer.declare(new Fields("air_spout"));
+//        outputFieldsDeclarer.declare(new Fields("step2_spout"));
     }
 
 
@@ -97,7 +100,24 @@ public class AirSpout extends BaseRichSpout {
             emit_data.setValue(result_step1_2);
             emit_data.setFlag(1);
             this.collector.emit(new Values(emit_data));
-//            result_step2 = airMap.step2(1, region_n);
+
+
+
+            result_step2 = airMap.step2(1, region_n);
+            bld3d = result_step2;
+                for (int o = 1; i <= 51; i++) {
+                    n = new MWNumericArray(Double.valueOf(i), MWClassID.DOUBLE);
+                    System.out.println("### Step2 Start ###");
+                    result_step2_1 = airMap.step2_1(1, result_step2[0], n, region_n);
+                    result_step2_2 = airMap.step2_2(2, result_step2_1[0], 0.1, result_step2[0]);
+                    result_step2_3 = airMap.step2_3(result_step1_2[0], result_step1_2[3], result_step2[0],
+                            result_step2_2[0], n, region_n);
+                }
+            emit_data1.setValue(bld3d);
+            emit_data1.setFlag(2);
+            this.collector.emit(new Values(emit_data1));
+
+
 
 
 //    //        result_step1_1 = airMap.step1_1(5);
