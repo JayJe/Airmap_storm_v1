@@ -105,8 +105,8 @@ public class AirSpout extends BaseRichSpout {
 
             result_step2 = airMap.step2(1, region_n);
             bld3d = result_step2;
-                for (int o = 1; i <= 51; i++) {
-                    n = new MWNumericArray(Double.valueOf(i), MWClassID.DOUBLE);
+                for (int o = 1; o <= 51; o++) {
+                    n = new MWNumericArray(Double.valueOf(o), MWClassID.DOUBLE);
                     System.out.println("### Step2 Start ###");
                     result_step2_1 = airMap.step2_1(1, result_step2[0], n, region_n);
                     result_step2_2 = airMap.step2_2(2, result_step2_1[0], 0.1, result_step2[0]);
@@ -116,6 +116,8 @@ public class AirSpout extends BaseRichSpout {
             emit_data1.setValue(bld3d);
             emit_data1.setFlag(2);
             this.collector.emit(new Values(emit_data1));
+
+
 
 
 

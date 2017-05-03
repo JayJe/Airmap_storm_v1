@@ -80,9 +80,9 @@ public class AirBolt extends BaseRichBolt {
 
         try {
             //emit_data = (ObjectArray)tuple.getValueByField("air");
-            emit_data = (ObjectArray)tuple.getValueByField("air_spout");
+            emit_data = (ObjectArray) tuple.getValueByField("air_spout");
 
-            if(emit_data.getFlag()==1) {
+            if (emit_data.getFlag() == 1) {
 
                 result_step1_2 = emit_data.getValue();
 
@@ -94,20 +94,17 @@ public class AirBolt extends BaseRichBolt {
 
                     System.out.println("*** Step1 bolt - Create AirMap ***");
                     this.airMap = new AirMap();
-                    int o=0;
+                    int o = 0;
                     System.out.println("region_n = " + o);
                     region_n = new MWNumericArray(Double.valueOf(o), MWClassID.DOUBLE);
 
                     result_step1_3 = airMap.step1_3(result_step1_2[1], result_step1_2[3], result_step1_2[4],
-                           region_n);
+                            region_n);
 
 //                    result_step2 = airMap.step2(1,region_n);
 
 
-
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     System.out.println("Exception: " + e.toString());
                 }
 
@@ -124,18 +121,20 @@ public class AirBolt extends BaseRichBolt {
                 */
             }
             /*
+
             else if(emit_data.getFlag()==2)
             {
+
                 result_step2_2 = emit_data.getValue();
 
                 System.out.println("**** step2_2 tuple read ok ****");
-                /*result_step2_3 = airMap.step2_3(result_step2_2[0],result_step2_2[1],
+                result_step2_3 = airMap.step2_3(result_step2_2[0],result_step2_2[1],
                         th,bld3d[0]);
 
                 result_step2_3 = airMap.step2_3(result_step1_2[0], result_step1_2[3], result_step2[0],
                         result_step2_2[0], n, region_n);
                 emit_data.setValue(result_step2_3);
-                /*
+
                 System.out.println("**** step2_3 ok ****");
                 Object[] result_step2_4 = airMap.step2_4(3, result_step1_2[1],
                         result_step1_2[0],bld3d[0],result_step2_3[0],result_step2_3[1],region_n);
@@ -146,8 +145,20 @@ public class AirBolt extends BaseRichBolt {
 
                 this.collector.emit(new Values(emit_data));
                 System.out.println("**** step2_3 tuple emit finish ****");
+
+                result_step2 = emit_data.getValue();
+                for (int i = 1; i <= 51; i++) {
+                    n = new MWNumericArray(Double.valueOf(i), MWClassID.DOUBLE);
+                    System.out.println("### Step2 Start ###");
+                    result_step2_1 = airMap.step2_1(1, result_step2[0], n, region_n);
+                    result_step2_2 = airMap.step2_2(2, result_step2_1[0], 0.1, result_step2[0]);
+                    result_step2_3 = airMap.step2_3(result_step1_2[0], result_step1_2[3], result_step2[0],
+                            result_step2_2[0], n, region_n);
+                }
             }
             */
+
+
         }
         catch (Exception e)
         {
@@ -155,7 +166,10 @@ public class AirBolt extends BaseRichBolt {
         }
         collector.ack(tuple);
 
-    }
+
+        }
+
+
 
 
 //    public void execute(Tuple tuple) {
