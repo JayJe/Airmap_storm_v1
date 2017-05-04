@@ -41,6 +41,7 @@ public class Step2Bolt extends BaseRichBolt {
             for (int o = 0; o <= 1; o++){
                 System.out.println("###step2 region_n ###= " +o);
                 region_n = new MWNumericArray(Double.valueOf(o), MWClassID.DOUBLE);
+                result_step1_1 = airMap.step1_1(5);
                 result_step1_2 = airMap.step1_2(5);
                 result_step2 = airMap.step2(1,region_n);
                 for (int i = 1; i <=51; i++){
@@ -79,6 +80,8 @@ public class Step2Bolt extends BaseRichBolt {
                     result_step2_3 = airMap.step2_3(result_step1_2[0], result_step1_2[3], result_step2[0],
                             result_step2_2[0], n, region_n);
                 }
+                result_step3 = airMap.step3(result_step1_1[0], result_step1_1[1], result_step1_1[2],
+                        result_step1_1[4], result_step2[0], region_n);
             }
         }
         catch (Exception e){

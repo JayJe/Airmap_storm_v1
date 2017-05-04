@@ -47,7 +47,8 @@ public class AirTopology {
         builder.setBolt("step2", new Step2Bolt(), 4)
                 .shuffleGrouping("spout"); // SplitBolt -> CountBolt
         builder.setBolt("Step3", new Step3Bolt(), 4)
-                .shuffleGrouping("spout");
+                .globalGrouping("step1")
+                .globalGrouping("step2");
 
 
         LocalCluster cluster = new LocalCluster();

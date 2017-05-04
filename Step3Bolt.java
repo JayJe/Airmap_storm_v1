@@ -20,6 +20,7 @@ public class Step3Bolt extends BaseRichBolt {
     private int index = 0;
 
     static private ObjectArray emit_data = null;
+    static private ObjectArray emit_data1 = null;
     static public MWNumericArray n = null;
     static public MWNumericArray region_n = null;
     static public Object[] result_step1_1 = null;
@@ -39,6 +40,7 @@ public class Step3Bolt extends BaseRichBolt {
 //        System.load("/home/yechan/Downloads/newNoiseStorm2/ycNoise2.jar");
         try {
             emit_data = new ObjectArray();
+            emit_data1 = new ObjectArray();
 
 
             System.out.println("*** result bolt - Create Class1 AirMap ***");
@@ -54,7 +56,7 @@ public class Step3Bolt extends BaseRichBolt {
                 result_step1_2 = airMap.step1_2(5);
                 // output[2] - nz_rng, cmap
 
-                bld3d= airMap.step2_1(1,region_n);
+                 result_step2 = airMap.step2(1,region_n);
                 // output[1] - bld3d
 
             /*airMap.step1_5(region_n);
@@ -76,7 +78,8 @@ public class Step3Bolt extends BaseRichBolt {
     public void execute(Tuple tuple) {
 
         try {
-            emit_data = (ObjectArray)tuple.getValueByField("result");
+            emit_data = (ObjectArray)tuple.getValueByField("step1");
+            emit_data1 = (ObjectArray)tuple.getValueByField("step2");
 
             if(emit_data.getFlag()==1) {
 
@@ -85,7 +88,7 @@ public class Step3Bolt extends BaseRichBolt {
 
 
             }
-            else if(emit_data.getFlag()==2)
+            else if(emit_data1.getFlag()==2)
             {
                 Object[] nz_bld_gi = emit_data.getValue();
 
